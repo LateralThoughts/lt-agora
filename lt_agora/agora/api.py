@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 
-from tastypie.authentication import SessionAuthentication, BasicAuthentication, ApiKeyAuthentication, MultiAuthentication
-from tastypie.authorization import DjangoAuthorization
+from tastypie.authentication import Authentication, BasicAuthentication, ApiKeyAuthentication
+from tastypie.authorization import DjangoAuthorization, Authorization
 from tastypie.resources import ModelResource
 from tastypie.validation import Validation
 from tastypie import fields
@@ -12,8 +12,8 @@ class UserResource(ModelResource):
     class Meta:
         queryset = User.objects.all()
         resource_name = 'user'
-        authentication = MultiAuthentication(SessionAuthentication(), BasicAuthentication(), ApiKeyAuthentication())
-        authorization = DjangoAuthorization()
+        authentication = Authentication()
+        authorization = Authorization()
 
 
 class DecisionResource(ModelResource):
@@ -22,8 +22,8 @@ class DecisionResource(ModelResource):
     class Meta:
         queryset = Decision.objects.all()
         resource_name = 'decision'
-        authentication = MultiAuthentication(SessionAuthentication(), BasicAuthentication(), ApiKeyAuthentication())
-        authorization = DjangoAuthorization()
+        authentication = Authentication()
+        authorization = Authorization()
 
 
 class AwesomeValidation(Validation):
@@ -50,6 +50,6 @@ class VoteResource(ModelResource):
     class Meta:
         queryset = Vote.objects.all()
         resource_name = 'vote'
-        authentication = MultiAuthentication(SessionAuthentication(), BasicAuthentication(), ApiKeyAuthentication())
-        authorization = DjangoAuthorization()
+        authentication = Authentication()
+        authorization = Authorization()
         validation = AwesomeValidation()
