@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>Lateral Thoughts - Agora</title>
+    <!-- Bootstrap -->
+    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Project -->
+    <link href="{{ STATIC_URL }}main/css/style.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+  </head>
+  <body>
+  	<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="{% url home %}">LT-Agora</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="{% url home %}">Page d'accueil</a></li>
+              <li><a href="{% url about %}">A propos</a></li>
+              <li><a href="{% url contact %}">Contact</a></li>
+              <li class="dropdown">
+                <a href="{% url home %}" class="dropdown-toggle" data-toggle="dropdown">Galleries <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                </ul>
+              </li>
+            </ul>
+
+            <ul class="nav pull-right">
+              {% if user.is_authenticated %}
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ user.email }}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <a href="{% url logout %}">Déconnexion</a>
+              </ul>
+              {% else %}
+              <a href="{% url socialauth_begin 'google-oauth2' %}" class="btn">Connectez-vous</a>
+              {% endif %}
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <div class="{% block content_class %}container{% endblock %}">
+      {% block content %} {% endblock %}
+
+      <hr>
+
+      <footer>
+        <p>&copy; Lateral-Thoughts 2012</p>
+      </footer>
+
+    </div> <!-- /container -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+    <!-- Project -->
+    <script src="{{ STATIC_URL }}main/js/application.js"></script>
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>
