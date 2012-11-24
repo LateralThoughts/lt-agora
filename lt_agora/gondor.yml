@@ -30,7 +30,7 @@ wsgi:
     #
     # wsgi = the Python module which should be importable
     # application = the callable in the Python module
-    entry_point: wsgi:application
+    entry_point: lt_agora.wsgi:application
     
     # Options for gunicorn which runs your WSGI project.
     gunicorn:

@@ -7,3 +7,5 @@ django-forms-bootstrap==2.0.3.post1
 django-social-auth==0.7.10
 django-tastypie==0.9.11
 gondor==1.1.5
+psycopg2==2.4.5
+gunicorn==0.14.3
