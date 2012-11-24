@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Décision : "{{ object.title }}"</h1>
+{% include "agora/inc_decision_detail.html" with obj=object only %}
+{% include "agora/inc_decision_action_bar.html" with obj=object only %}
+{% if not forloop.last %}<hr>{% endif %}
+{% endblock %}

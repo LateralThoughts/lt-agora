@@ -16,14 +16,14 @@
       <div class="span6">
         <h2>A voter</h2>
         <p>{% for decision in in_progress %}
-          {% include 'decision/inc_decision_detail.html' with obj=decision only %}
+          {% include 'agora/inc_decision_detail.html' with obj=decision only %}
           {% endfor %}</p>
         <p><a class="btn" href="#">Voir plus &raquo;</a></p>
       </div>
       <div class="span6">
         <h2>Archivées</h2>
         <p>{% for decision in closed %}
-          {% include 'decision/inc_decision_detail.html' with obj=decision only %}
+          {% include 'agora/inc_decision_detail.html' with obj=decision only %}
           {% endfor %}</p>
         <p><a class="btn" href="#">Voir plus &raquo;</a></p>
      </div>

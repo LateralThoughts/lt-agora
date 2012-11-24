@@ -4,6 +4,7 @@ from django.conf import settings
 
 from tastypie.api import Api
 from agora.api import DecisionResource, VoteResource
+from agora.models import Decision
 
 admin.autodiscover()
 
@@ -18,6 +19,16 @@ urlpatterns += patterns('agora.views',
     url(r'^about/?$', 'index', name='about'),
     url(r'^contact/?$', 'index', name='contact'),
     url(r'^logout/?$', 'index', name='logout'),
+)
+
+# generic views 
+info_dict = {
+    'queryset': Decision.objects.all(),
+}
+
+urlpatterns += patterns('',
+    url(r'^decision/all/?$', 'django.views.generic.list_detail.object_list', info_dict),
+    url(r'^decision/(?P<object_id>\d+)/$', 'django.views.generic.list_detail.object_detail', info_dict),
 )
 
 # api views
