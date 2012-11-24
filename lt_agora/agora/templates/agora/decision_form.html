@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block nav_propc %}class="active"{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>Soumettre une proposition</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+	{{ form|crispy }}
+	<input type="submit" name="create" class="btn" value="Soumettre">
+</form>
+{% endblock %}

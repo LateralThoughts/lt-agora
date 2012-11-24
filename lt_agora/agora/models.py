@@ -2,8 +2,10 @@ from django.db import models
 from django.db.models import Sum
 from django.contrib.auth.models import User
 from django.utils.timezone import utc
-from datetime import datetime
+from datetime import datetime, timedelta
 
+def default_closed_date():
+    return datetime.now() + timedelta(days=7)
 
 class Decision(models.Model):
     title = models.CharField(max_length=300)
@@ -11,7 +13,7 @@ class Decision(models.Model):
     user = models.ForeignKey(User, related_name="decisions")
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
-    closed_at = models.DateTimeField(null=True, blank=True)
+    closed_at = models.DateTimeField(null=True, blank=True, default=default_closed_date)
 
     def is_closed(self):
         return self.closed_at <= datetime.utcnow().replace(tzinfo=utc)

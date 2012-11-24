@@ -25,9 +25,10 @@
           <a class="brand" href="{% url home %}">LT-Agora</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="{% url home %}">Page d'accueil</a></li>
-              <li><a href="{% url decision_list %}">Propositions</a></li>
-              <li><a href="{% url about %}">A propos</a></li>
+              <li {% block nav_home %}{% endblock %}><a href="{% url home %}">Page d'accueil</a></li>
+              <li {% block nav_prop %}{% endblock %}><a href="{% url decision_list %}">Propositions</a></li>
+              <li {% block nav_propc %}{% endblock %}><a href="{% url decision_create %}">Soumettre une proposition</a></li>
+              <li {% block nav_about %}{% endblock %}><a href="{% url about %}">A propos</a></li>
             </ul>
 
             <ul class="nav pull-right">

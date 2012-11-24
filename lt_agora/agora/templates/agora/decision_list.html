@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block nav_prop %}class="active"{% endblock %}
 {% block content %}
 <h1>Décisions en cours ou archivées</h1>
 {% for decision in object_list %}

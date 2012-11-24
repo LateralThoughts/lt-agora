@@ -26,9 +26,16 @@ urlpatterns += patterns('agora.views',
 info_dict = {
     'queryset': Decision.objects.all(),
 }
+cinfo_dict = {
+  'model': Decision,
+  'login_required' : True,
+}
+
 
 urlpatterns += patterns('',
     url(r'^decision/all/?$', 'django.views.generic.list_detail.object_list', info_dict, name="decision_list"),
+    url(r'^decision/create/?$', 'django.views.generic.create_update.create_object', 
+        cinfo_dict, name="decision_create"),
     url(r'^decision/(?P<object_id>\d+)/$', 'django.views.generic.list_detail.object_detail', info_dict, name="decision_detail"),
 )
 
