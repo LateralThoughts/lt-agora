@@ -3,7 +3,7 @@
 <h1>Décisions en cours ou archivées</h1>
 {% for decision in object_list %}
 {% include "agora/inc_decision_detail.html" with obj=decision only %}
-{% include "agora/inc_decision_action_bar.html" with obj=decision only %}
+{% include "agora/inc_decision_action_bar.html" with obj=decision user=user only %}
 {% if not forloop.last %}<hr>{% endif %}
 {% endfor %}
 

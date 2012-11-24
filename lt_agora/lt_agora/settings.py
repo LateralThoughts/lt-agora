@@ -125,6 +125,24 @@ AUTHENTICATION_BACKENDS = (
 GOOGLE_OAUTH2_CLIENT_ID = '28514042739.apps.googleusercontent.com'
 GOOGLE_OAUTH2_CLIENT_SECRET = 'oXIKw3Q1G38WOu3qa9VPrWkg'
 
+SOCIAL_AUTH_PIPELINE = (
+    'social_auth.backends.pipeline.social.social_auth_user',
+    'accounts.pipeline.check_credentials',
+    'social_auth.backends.pipeline.associate.associate_by_email',
+    'social_auth.backends.pipeline.user.get_username',
+    'social_auth.backends.pipeline.user.create_user',
+    'social_auth.backends.pipeline.social.associate_user',
+    'social_auth.backends.pipeline.social.load_extra_data',
+    'social_auth.backends.pipeline.user.update_user_details'
+)
+
+LOGIN_REDIRECT_URL = "/"
+LOGIN_ERROR_URL    = '/'
+SOCIAL_AUTH_RAISE_EXCEPTIONS = True
+
+#-------------------------------------------------
+# Registered applications
+#-------------------------------------------------
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -142,6 +160,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'django.contrib.comments',
     'agora',
+    'accounts',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -7,7 +7,7 @@
 <h1>Décision : "{{ object.title }}" ({{ object.balance }})</h1>
 
 {% include "agora/inc_decision_detail.html" with obj=object only %}
-{% include "agora/inc_decision_action_bar.html" with obj=object only %}
+{% include "agora/inc_decision_action_bar.html" with obj=object user=user only %}
 <h2>Timeline</h2>
 {% for vote in object.votes.all %}
     {% include 'agora/inc_vote_detail.html' with obj=vote only %}

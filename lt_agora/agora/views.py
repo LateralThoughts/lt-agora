@@ -11,3 +11,7 @@ def index(request,
             'in_progress' : in_progress,
             'closed' : closed,
         })
+
+def about(request,
+		  template_name="about.html"):
+	return render(request, template_name)
