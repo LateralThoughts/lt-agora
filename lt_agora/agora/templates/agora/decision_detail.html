@@ -1,7 +1,23 @@
 {% extends "base.html" %}
+
+{% load comments %}
+{% load crispy_forms_tags %}
+
 {% block content %}
-<h1>Décision : "{{ object.title }}"</h1>
+<h1>Décision : "{{ object.title }}" ({{ object.balance }})</h1>
+
 {% include "agora/inc_decision_detail.html" with obj=object only %}
 {% include "agora/inc_decision_action_bar.html" with obj=object only %}
-{% if not forloop.last %}<hr>{% endif %}
+<h2>Timeline</h2>
+{% for vote in object.votes.all %}
+    {% include 'agora/inc_vote_detail.html' with obj=vote only %}
+{% empty %}
+<p>Pas encore de votes</p>
+{% endfor %}
+
+<h2>Commentaires</h2>
+{% render_comment_list for object %}
+
+<h2>Soumettre un commentaire</h2>
+{% render_comment_form for object %}
 {% endblock %}

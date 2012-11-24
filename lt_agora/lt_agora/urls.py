@@ -11,6 +11,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('social_auth.urls')),
+    url(r'^comments/', include('fluent_comments.urls')),
 )
 
 # website views
@@ -27,8 +28,8 @@ info_dict = {
 }
 
 urlpatterns += patterns('',
-    url(r'^decision/all/?$', 'django.views.generic.list_detail.object_list', info_dict),
-    url(r'^decision/(?P<object_id>\d+)/$', 'django.views.generic.list_detail.object_detail', info_dict),
+    url(r'^decision/all/?$', 'django.views.generic.list_detail.object_list', info_dict, name="decision_list"),
+    url(r'^decision/(?P<object_id>\d+)/$', 'django.views.generic.list_detail.object_detail', info_dict, name="decision_detail"),
 )
 
 # api views

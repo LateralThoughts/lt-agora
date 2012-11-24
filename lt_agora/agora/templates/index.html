@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-  <!-- Main hero unit for a primary marketing message or call to action -->
   <div class="hero-unit">
     <h1>Bienvenue sur l'Agora</h1>
     <p>Cette plateforme vous permet d'avoir accès aux décisions collègialement prises au sein de LT.
@@ -9,7 +8,7 @@
         <li>Voter pour les décisions en cours d'arbitrage;</li>
         <li>Faire de nouvelles propositions à la communauté;</li>
       </ul></p>
-    <p><a href="{% url home %}"class="btn btn-primary btn-large">Voir les décisions à trancher</a></p>
+    <p><a href="{% url decision_list %}"class="btn btn-primary btn-large">Voir les décisions à trancher</a></p>
   </div>
 
     <div class="row">
@@ -18,14 +17,14 @@
         <p>{% for decision in in_progress %}
           {% include 'agora/inc_decision_detail.html' with obj=decision only %}
           {% endfor %}</p>
-        <p><a class="btn" href="#">Voir plus &raquo;</a></p>
+        <p><a class="btn" href="{% url decision_list %}">Voir plus &raquo;</a></p>
       </div>
       <div class="span6">
         <h2>Archivées</h2>
         <p>{% for decision in closed %}
           {% include 'agora/inc_decision_detail.html' with obj=decision only %}
           {% endfor %}</p>
-        <p><a class="btn" href="#">Voir plus &raquo;</a></p>
+        <p><a class="btn" href="{% url decision_list %}">Voir plus &raquo;</a></p>
      </div>
     </div>
 

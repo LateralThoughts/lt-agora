@@ -81,6 +81,19 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 )
 
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.request",
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+)
+
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -95,6 +108,10 @@ ROOT_URLCONF = 'lt_agora.urls'
 WSGI_APPLICATION = 'lt_agora.wsgi.application'
 
 TEMPLATE_DIRS = ()
+
+# forms
+CRISPY_TEMPLATE_PACK = "bootstrap"
+CRISPY_FAIL_SILENTLY = not DEBUG
 
 #-------------------------------------------------
 # Social auth configuration 
@@ -121,6 +138,9 @@ INSTALLED_APPS = (
     'south',
     'social_auth',
     'tastypie',
+    'fluent_comments',
+    'crispy_forms',
+    'django.contrib.comments',
     'agora',
 )
 
