@@ -3,7 +3,7 @@ import urlparse
 
 from .settings import *
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 if "GONDOR_DATABASE_URL" in os.environ:
@@ -58,3 +58,4 @@ LOGGING = {
         },
     }
 }
+TASTYPIE_FULL_DEBUG = True
