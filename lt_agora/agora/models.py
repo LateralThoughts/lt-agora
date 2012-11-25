@@ -54,7 +54,7 @@ def notify_contact(sender, instance, created, **kwargs):
     from django.core.mail import EmailMessage
     from django.template.loader import render_to_string
     if not settings.DEBUG:
-        subject = 'A new proposal has been submitted, id : %s' % instance.pk
+        subject = 'A new proposal has been submitted, LT-%s' % instance.pk
         from_email = settings.AGORA_BOT_EMAIL
         to = settings.AGORA_CONTACT
         ctxt = {'obj': instance }
@@ -64,3 +64,30 @@ def notify_contact(sender, instance, created, **kwargs):
         msg.send()
 
 post_save.connect(notify_contact, sender=Decision)
+
+# handling of closing proposals when everyone voted
+def consensus_handler(sender, instance, created, **kwargs):
+    """Tries to close proposals when consensus is reached"""
+    from django.conf import settings
+    from django.core.mail import EmailMessage
+    from django.template.loader import render_to_string
+    from django.contrib.auth.models import User
+    # everyone voted 0 or 1
+    is_closed = (User.objects.count() == instance.decision.votes.exclude(value=-1).count())
+
+    if is_closed:
+        from datetime import datetime
+        decision = instance.decision
+        decision.closed_at = datetime.now()
+        decision.save()
+
+        subject = 'Proposal LT-%s has been accepted' % decision.pk
+        from_email = settings.AGORA_BOT_EMAIL
+        to = settings.AGORA_CONTACT
+        ctxt = {'obj': decision }
+        html_content = render_to_string('agora/email_decision_ok_body.html', ctxt)
+        msg = EmailMessage(subject, html_content, from_email, [to])
+        msg.content_subtype = "html" # Main content is now text/html
+        msg.send()
+
+post_save.connect(consensus_handler, sender=Vote)
