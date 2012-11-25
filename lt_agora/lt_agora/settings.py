@@ -3,6 +3,10 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+AGORA_CONTACT = u'contact@lateral-thoughts.com'
+
+AGORA_BOT_EMAIL = 'platon@agora.lateral-thoughts.com'
+
 ADMINS = (
     ('Olivier Girardot', 'ogirardot@appartinfo.com'),
 )
@@ -196,3 +200,5 @@ if DEBUG:
     MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
     INTERNAL_IPS = ('127.0.0.1',)
     DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS' : False }
+    EMAIL_HOST = "smtp.free.fr"
+
