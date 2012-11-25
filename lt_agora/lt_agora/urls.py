@@ -6,6 +6,7 @@ from django.conf import settings
 from tastypie.api import Api
 from agora.api import DecisionResource, VoteResource, UserResource
 from agora.models import Decision
+from agora.forms import DecisionForm
 
 admin.autodiscover()
 
@@ -29,7 +30,7 @@ info_dict = {
     'queryset': Decision.objects.all(),
 }
 cinfo_dict = {
-  'model': Decision,
+  'form_class': DecisionForm,
   'login_required' : True,
 }
 

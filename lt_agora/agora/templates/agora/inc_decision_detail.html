@@ -4,4 +4,13 @@
     <p>{{ obj.description }}</p>
     <small>créé par {{ obj.user }} le {{ obj.created_at }}.</small>
   </blockquote>
+  <div class="download">
+  	{% if obj.document %}
+  	<strong>Document uploadé :</strong> <a href="{{ MEDIA_URL }}/{{ obj.document.url }}" target="_blank">{{ obj.document.name }}</a> ({{ obj.document.file.size|filesizeformat }})
+    {% if obj.document.desc %}<div class="desc">{{ obj.document.desc }}</div>{% endif %}
+    {% else %}
+    Pas de documents associés
+    {% endif %}
+</div>
+
 </div>

@@ -16,6 +16,7 @@ class Decision(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     closed_at = models.DateTimeField(null=True, blank=True, default=default_closed_date)
+    document = models.FileField(upload_to="decision_docs", null=True, blank=True)
 
     def is_closed(self):
         return self.closed_at <= datetime.utcnow().replace(tzinfo=utc)
@@ -52,14 +53,14 @@ def notify_contact(sender, instance, created, **kwargs):
     from django.conf import settings
     from django.core.mail import EmailMessage
     from django.template.loader import render_to_string
-
-    subject = 'A new proposal has been submitted, id : %s' % instance.pk
-    from_email = settings.AGORA_BOT_EMAIL
-    to = settings.AGORA_CONTACT
-    ctxt = {'obj': instance }
-    html_content = render_to_string('agora/email_decision_body.html', ctxt)
-    msg = EmailMessage(subject, html_content, from_email, [to])
-    msg.content_subtype = "html" # Main content is now text/html
-    msg.send()
+    if not settings.DEBUG:
+        subject = 'A new proposal has been submitted, id : %s' % instance.pk
+        from_email = settings.AGORA_BOT_EMAIL
+        to = settings.AGORA_CONTACT
+        ctxt = {'obj': instance }
+        html_content = render_to_string('agora/email_decision_body.html', ctxt)
+        msg = EmailMessage(subject, html_content, from_email, [to])
+        msg.content_subtype = "html" # Main content is now text/html
+        msg.send()
 
 post_save.connect(notify_contact, sender=Decision)
