@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
@@ -16,8 +17,9 @@ urlpatterns = patterns('',
 )
 
 # website views
+from agora.views import index
 urlpatterns += patterns('agora.views',
-    url(r'^$', 'index', name='home'),
+    url(r'^$', login_required(index), name='home'),
     url(r'^about/?$', 'about', name='about'),
     url(r'^logout/?$', 'index', name='logout'),
 )
@@ -31,12 +33,13 @@ cinfo_dict = {
   'login_required' : True,
 }
 
-
+from django.views.generic.list_detail import object_list, object_detail
+from django.views.generic.create_update import create_object
 urlpatterns += patterns('',
-    url(r'^decision/all/?$', 'django.views.generic.list_detail.object_list', info_dict, name="decision_list"),
-    url(r'^decision/create/?$', 'django.views.generic.create_update.create_object', 
+    url(r'^decision/all/?$', login_required(object_list), info_dict, name="decision_list"),
+    url(r'^decision/create/?$', login_required(create_object), 
         cinfo_dict, name="decision_create"),
-    url(r'^decision/(?P<object_id>\d+)/$', 'django.views.generic.list_detail.object_detail', info_dict, name="decision_detail"),
+    url(r'^decision/(?P<object_id>\d+)/$', login_required(object_detail), info_dict, name="decision_detail"),
 )
 
 # api views

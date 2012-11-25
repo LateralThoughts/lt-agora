@@ -14,6 +14,7 @@
     {% block extra_css %}{% endblock %}
   </head>
   <body>
+    {% block navbar %}
   	<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -45,6 +46,7 @@
         </div>
       </div>
     </div>
+    {% endblock %}
     <div class="{% block content_class %}container{% endblock %}">
       {% block content %} {% endblock %}
 
