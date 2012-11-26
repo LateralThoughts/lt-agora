@@ -1,4 +1,4 @@
-<html>
+<html ng-app="AngularAgora">
   <head>
     <title>Lateral Thoughts - Agora</title>
     <!-- Bootstrap -->
@@ -6,6 +6,15 @@
     <!-- Project -->
     <link href="{{ STATIC_URL|default:"/site_media/static/" }}main/css/style.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL|default:"/site_media/static/" }}fluent_comments/css/ajaxcomments.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="{{ STATIC_URL|default:"/site_media/static/" }}bootstrap/js/bootstrap.min.js"></script>
+    <!-- Project -->
+    <script src="{{ STATIC_URL|default:"/site_media/static/" }}main/js/application.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+    <script src="http://code.angularjs.org/1.0.2/angular-resource.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL|default:"/site_media/static/" }}fluent_comments/js/ajaxcomments.js"></script>
+
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -57,12 +66,6 @@
       </footer>
 
     </div> <!-- /container -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="{{ STATIC_URL|default:"/site_media/static/" }}bootstrap/js/bootstrap.min.js"></script>
-    <!-- Project -->
-    <script src="{{ STATIC_URL|default:"/site_media/static/" }}main/js/application.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL|default:"/site_media/static/" }}fluent_comments/js/ajaxcomments.js"></script>
     {% block extra_js %}{% endblock %}
     <script type="text/javascript">
 

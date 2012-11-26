@@ -14,7 +14,11 @@
 {% empty %}
 <p>Pas encore de votes</p>
 {% endfor %}
-
+<ul ng-controller="VoteListCtrl">
+    <li ng-repeat="vote in votes.objects">
+      <span>le {= vote.created_at =} <strong>{= vote.user.username =}</strong> a voté <strong>{= vote.value =}</strong></span>
+    </li>
+  </ul>
 <h2>Commentaires</h2>
 {% render_comment_list for object %}
 

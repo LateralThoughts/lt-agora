@@ -45,6 +45,15 @@ $.ajaxSetup({
 });
 
 $(document).ready(function() {
+    var m = angular.module('AngularAgora', ['ngResource']); 
+    m.config(function($interpolateProvider) { $interpolateProvider.startSymbol('{='); $interpolateProvider.endSymbol('=}'); });
+
+    m.factory('Vote', function ($resource) {
+        return $resource('/api/v1/vote/?decision=:decisionId&format=json', {}, {
+            'save': {method:'PUT'}
+        });
+    });
+
 	$(".vote_action").click(function(event) {
 		var jdata = {};
 		var e = event.srcElement;
@@ -62,3 +71,7 @@ $(document).ready(function() {
 		});
 	});
 });
+
+function VoteListCtrl($scope, $location, Vote) {
+  $scope.votes = Vote.get({decisionId:1});
+}
