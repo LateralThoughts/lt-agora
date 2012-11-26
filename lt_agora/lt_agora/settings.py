@@ -1,4 +1,5 @@
 # Django settings for lt_agora project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -8,7 +9,7 @@ AGORA_CONTACT = u'contact@lateral-thoughts.com'
 AGORA_BOT_EMAIL = 'platon@agora.lateral-thoughts.com'
 
 ADMINS = (
-    ('Olivier Girardot', 'ogirardot@appartinfo.com'),
+    ('Olivier Girardot', 'o.girardot@lateral-thoughts.com'),
 )
 
 MANAGERS = ADMINS
@@ -126,8 +127,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-GOOGLE_OAUTH2_CLIENT_ID = '28514042739.apps.googleusercontent.com'
-GOOGLE_OAUTH2_CLIENT_SECRET = 'oXIKw3Q1G38WOu3qa9VPrWkg'
+GOOGLE_OAUTH2_CLIENT_ID = os.environ['AGORA_GOOGLE_CLIENT_ID']
+GOOGLE_OAUTH2_CLIENT_SECRET = os.environ['AGORA_GOOGLE_CLIENT_SECRET']
 
 SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.social.social_auth_user',
