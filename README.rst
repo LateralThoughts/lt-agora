@@ -1,5 +1,8 @@
+============
 LT Agora
-===============
+=============
+:Info: See `github <http://github.com/LateralThoughts/lt-agora>`_ for the latest source.
+:Author: Olivier Girardot <o.girardot@lateral-thoughts.com>
 
 Goals
 ------------------
