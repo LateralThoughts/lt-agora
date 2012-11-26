@@ -197,8 +197,19 @@ LOGGING = {
     }
 }
 
+# desactivate comment email notification
+FLUENT_COMMENTS_USE_EMAIL_NOTIFICATION = False
+
+EMAIL_HOST = os.environ['AGORA_EMAIL_HOST']
+EMAIL_HOST_USER = os.environ['AGORA_EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['AGORA_EMAIL_HOST_PASSWORD']
+EMAIL_PORT = os.environ['AGORA_EMAIL_PORT']
+EMAIL_USE_TLS = os.environ['AGORA_EMAIL_USE_TLS']
+
 if DEBUG:
     MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
     INTERNAL_IPS = ('127.0.0.1',)
     DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS' : False }
-    EMAIL_HOST = "smtp.free.fr"
+    #EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    #EMAIL_FILE_PATH = '/tmp/app-messages' # change this to a proper location
+

@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Sum
 from django.contrib.auth.models import User
 from django.utils.timezone import utc
+from django.contrib.comments.models import Comment
 from datetime import datetime, timedelta
 
 
@@ -91,3 +92,23 @@ def consensus_handler(sender, instance, created, **kwargs):
         msg.send()
 
 post_save.connect(consensus_handler, sender=Vote)
+
+# handling of notification of new comments
+def notify_comment(sender, instance, created, **kwargs):
+    """Tries to close proposals when consensus is reached"""
+    from django.conf import settings
+    from django.core.mail import EmailMessage
+    from django.template.loader import render_to_string
+
+    if isinstance(instance.content_object, Decision):
+        decision = instance.content_object
+        subject = 'New comment on LT-%s has been accepted' % decision.pk
+        from_email = settings.AGORA_BOT_EMAIL
+        to = settings.AGORA_CONTACT
+        ctxt = {'obj': instance }
+        html_content = render_to_string('agora/email_decision_comment_body.html', ctxt)
+        msg = EmailMessage(subject, html_content, from_email, [to])
+        msg.content_subtype = "html" # Main content is now text/html
+        msg.send()
+
+post_save.connect(notify_comment, sender=Comment)
