@@ -27,6 +27,16 @@ You need to have Python 2.7+ installed, and virtualenv,
 * execute **pip install -r requirements.txt** to fetch dependencies;
 * Test database is already bundled, so then all you need is to execute **./manage.py runserver** to run local dev server;
 
+A few env variables are needed to configure the projet properly :
+
+* AGORA_GOOGLE_CLIENT_ID : google api console client id for app
+* AGORA_GOOGLE_CLIENT_SECRET : google secret api key for app
+* AGORA_EMAIL_HOST : for the server to use for smtp
+* AGORA_EMAIL_HOST_USER
+* AGORA_EMAIL_HOST_PASSWORD
+* AGORA_EMAIL_PORT
+* AGORA_EMAIL_USE_TLS ("True" or "False")
+
 License
 -------
 Project is licensed under AGPL.
