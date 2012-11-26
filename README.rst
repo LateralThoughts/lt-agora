@@ -1,11 +1,11 @@
-============
+========
 LT Agora
-=============
+========
 :Info: See `github <http://github.com/LateralThoughts/lt-agora>`_ for the latest source.
 :Author: Olivier Girardot <o.girardot@lateral-thoughts.com>
 
 Goals
-------------------
+-----
 The goal of the projet is to provide an online democratic plateform to take decision altogether and keep traces of the whereabouts of these decisions.
 
 With Agora, you can :
@@ -19,7 +19,7 @@ With Agora, you can :
 * Upload documents to decisions and make them available for download.
 
 Setting up
-------------------
+----------
 You need to have Python 2.7+ installed, and virtualenv, 
 
 * Clone project;
@@ -28,9 +28,9 @@ You need to have Python 2.7+ installed, and virtualenv,
 * Test database is already bundled, so then all you need is to execute **./manage.py runserver** to run local dev server;
 
 License
-------------------
+-------
 Project is licensed under AGPL.
 
 Contact
-------------------
+-------
 You can contact us at : contact (at) lateral-thoughts.com if you need any help.
