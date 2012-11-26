@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 
 from tastypie.authentication import Authentication, BasicAuthentication, ApiKeyAuthentication
 from tastypie.authorization import DjangoAuthorization, Authorization
-from tastypie.resources import ModelResource
+from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie.validation import Validation
 from tastypie import fields
 
@@ -44,8 +44,8 @@ class AwesomeValidation(Validation):
 
 
 class VoteResource(ModelResource):
-    user = fields.ForeignKey(UserResource, 'user')
-    decision = fields.ForeignKey(DecisionResource, 'decision')
+    user = fields.ForeignKey(UserResource, 'user', full=True)
+    decision = fields.ForeignKey(DecisionResource, 'decision', full=True)
     
     class Meta:
         queryset = Vote.objects.all()
@@ -53,3 +53,8 @@ class VoteResource(ModelResource):
         authentication = Authentication()
         authorization = Authorization()
         validation = AwesomeValidation()
+        filtering = {
+            'decision': ALL,
+            'user': ALL_WITH_RELATIONS,
+        }
+
