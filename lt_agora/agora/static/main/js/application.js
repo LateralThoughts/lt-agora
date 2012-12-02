@@ -47,7 +47,7 @@ $.ajaxSetup({
 $(document).ready(function() {
 	$(".vote_action").click(function(event) {
 		var jdata = {};
-		var e = event.srcElement;
+		var e = this;
 		jdata['decision'] = "/api/v1/decision/" + e.getAttribute("data-ref") + "/";
 		jdata['user'] = "/api/v1/user/" + e.getAttribute("data-user") + "/";
 		jdata['value'] = e.getAttribute("data-value");
