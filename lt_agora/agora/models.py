@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.db.models import Sum
 from django.contrib.auth.models import User
@@ -112,3 +113,15 @@ def notify_comment(sender, instance, created, **kwargs):
         msg.send()
 
 post_save.connect(notify_comment, sender=Comment)
+
+def notify_last_missing(sender, instance, created, **kwargs):
+    """Notify last person who did not vote"""
+    from django.contrib.auth.models import User
+    last_users = User.objects.exclude(pk__in=[vote["user"] for vote in instance.decision.votes.values("user")])
+    if last_users.count() == 1:
+        retardataire = last_users[0]
+        subject = "Votre avis est requis pour LT-%s" % (instance.decision.pk)
+        text = u"Tout le monde a voté sauf vous. Veuillez vous rendre à l'adresse http://agora.lateral-thoughts.com%s" % (instance.decision.get_absolute_url())
+        retardataire.email_user(subject, text)
+
+post_save.connect(notify_last_missing, sender=Vote)
