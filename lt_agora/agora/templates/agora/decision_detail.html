@@ -16,8 +16,43 @@
 {% endfor %}
 
 <h2>Commentaires</h2>
-{% render_comment_list for object %}
-
+    {% render_comment_list for object %}
+    
 <h2>Soumettre un commentaire</h2>
-{% render_comment_form for object %}
+
+    {% get_comment_form for object as form %}
+    <form action="{% comment_form_target %}" method="POST" class="js-comments-form comments-form form-horizontal"
+          data-ajax-action="/comments/post/ajax/">
+    {% csrf_token %}
+
+    {{ form.content_type }}
+    {{ form.object_pk }}
+    {{ form.timestamp }}
+    {{ form.security_hash }}
+	<div id="div_id_comment" class="clearfix control-group">
+		<label for="id_comment" class="control-label requiredField">Commentaire<span class="asteriskField">*</span></label>
+		<div class="controls">
+			<textarea id="id_comment" rows="10" cols="40" name="comment" class="textarea"></textarea>
+		</div>
+	</div>
+	<div id="div_id_honeypot" class="clearfix control-group">
+		<label for="id_honeypot" class="control-label ">
+				Si vous saisissez quelque chose dans ce champ, votre commentaire sera considéré comme étant indésirable
+		</label>
+		<div class="controls">
+			<input id="id_honeypot" type="text" class="textinput textInput" name="honeypot" />
+		</div>
+	</div>
+      <div class="form-actions">
+        <input type="submit" name="post" class="btn btn-submit" value="Envoyer" />
+        <input type="submit" name="preview" class="btn btn-submit" value="Prévisualiser" />
+        
+<span id="comment-waiting" style="display: none;">
+  <img src="/static/fluent_comments/img/ajax-wait.gif" alt="" class="ajax-loader" />Please wait . . .
+</span>
+<span id="comment-added-message" style="display: none;">Your comment has been posted!</span>
+<div id="comment-moderated-message" style="display: none;">Your comment has been posted, it will be visible for other users after approval.</div>
+      </div>
+    </form>
+
 {% endblock %}
