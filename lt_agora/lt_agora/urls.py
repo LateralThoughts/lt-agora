@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.conf.urls import patterns, include, url
+from django.contrib.auth.models import User
 from django.contrib import admin
 from django.conf import settings
 
@@ -25,22 +26,38 @@ urlpatterns += patterns('agora.views',
     url(r'^logout/?$', 'index', name='logout'),
 )
 
-# generic views 
-info_dict = {
+# generic views
+decision_info_dict = {
     'queryset': Decision.objects.all(),
 }
-cinfo_dict = {
+author_info_dict = {
+    'queryset': User.objects.all(),
+}
+decision_cinfo_dict = {
   'form_class': DecisionForm,
-  'login_required' : True,
+  'login_required': True,
 }
 
 from django.views.generic.list_detail import object_list, object_detail
 from django.views.generic.create_update import create_object
 urlpatterns += patterns('',
-    url(r'^decision/all/?$', login_required(object_list), info_dict, name="decision_list"),
-    url(r'^decision/create/?$', login_required(create_object), 
-        cinfo_dict, name="decision_create"),
-    url(r'^decision/(?P<object_id>\d+)/$', login_required(object_detail), info_dict, name="decision_detail"),
+    url(r'^decision/all/?$',
+        login_required(object_list),
+        decision_info_dict,
+        name="decision_list"),
+    url(r'^decision/create/?$',
+        login_required(create_object),
+        decision_cinfo_dict,
+        name="decision_create"),
+    url(r'^decision/(?P<object_id>\d+)/$',
+        login_required(object_detail),
+        decision_info_dict,
+        name="decision_detail"),
+    # author part :
+    url(r'^author/(?P<object_id>\d+)/$',
+        login_required(object_detail),
+        author_info_dict,
+        name="author_detail"),
 )
 
 # api views

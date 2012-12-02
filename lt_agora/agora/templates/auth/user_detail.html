@@ -1,43 +1,33 @@
 {% extends "base.html" %}
 {% block nav_prop %}class="active"{% endblock %}
 {% block content %}
-<h1>Décisions en cours ou archivées</h1>
+<h1>Auteur : {{ object }}</h1>
+<h2>Identité</h2>
+<ul>
+    <li>Nom d'utilisateur : {{ object.username }}</li>
+    <li>Nom : {{ object.first_name }} {{ object.last_name }}</li>
+    <li>Email : {{ object.email }} </li>
+    <li>Dernière date de connection : {{ object.last_login }}</li>
+    <li>Date d'inscription : {{ object.date_joined }}</li>
+</ul>
+<h2>Décisions proposées {{ object.username }}</h2>
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>#</th>
             <th>Sujet</th>
             <th>Date de soumission</th>
-            <th>Auteur</th>
             <th>Statut</th>
     </thead>
     <tbody>
-        {% for decision in object_list %}
+        {% for decision in object.decisions.all %}
         <tr>
             <td><a href="{{ decision.get_absolute_url }}">LT-{{ decision.pk }}</a></td>
             <td><a href="{{ decision.get_absolute_url }}">{{ decision.title }}</a></td>
             <td>{{ decision.created_at }}</td>
-            <td><a href="{% url author_detail user.pk %}">{{ decision.user }}</a></td>
             <td>{% include "agora/inc_decision_action_bar.html" with obj=decision user=user short=1 only %}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-{% if is_paginated %}
-<div class="pagination">
-    <span class="step-links">
-        {% if objects.has_previous %}
-            <a href="?page={{ contacts.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
-        </span>
-
-        {% if contacts.has_next %}
-            <a href="?page={{ contacts.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>
-{% endif %}
 {% endblock %}
