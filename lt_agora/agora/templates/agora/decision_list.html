@@ -2,16 +2,31 @@
 {% block nav_prop %}class="active"{% endblock %}
 {% block content %}
 <h1>Décisions en cours ou archivées</h1>
-{% for decision in object_list %}
-{% include "agora/inc_decision_detail.html" with obj=decision only %}
-{% include "agora/inc_decision_action_bar.html" with obj=decision user=user only %}
-{% if not forloop.last %}<hr>{% endif %}
-{% endfor %}
-
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Sujet</th>
+            <th>Date de soumission</th>
+            <th>Auteur</th>
+            <th>Statut</th>
+    </thead>
+    <tbody>
+        {% for decision in object_list %}
+        <tr>
+            <td><a href="{{ decision.get_absolute_url }}">LT-{{ decision.pk }}</a></td>
+            <td><a href="{{ decision.get_absolute_url }}">{{ decision.title }}</a></td>
+            <td>{{ decision.created_at }}</td>
+            <td>{{ decision.user }}</td>
+            <td>{% include "agora/inc_decision_action_bar.html" with obj=decision user=user short=1 only %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% if is_paginated %}
 <div class="pagination">
     <span class="step-links">
-        {% if contacts.has_previous %}
+        {% if objects.has_previous %}
             <a href="?page={{ contacts.previous_page_number }}">previous</a>
         {% endif %}
 

@@ -1,4 +1,4 @@
-<p>Status : 
+<p>{% if not short %}Status : {% endif %}
 	{% if obj.is_closed %}
 	  <span class="label label-success">Terminé</span>
 	{% else %}
@@ -8,5 +8,7 @@
 	  <a href="#" class="btn vote_action" data-user="{{ user.pk }}" data-ref="{{ obj.pk }}" data-value="0">0</a>
 	  <a href="#" class="btn vote_action" data-user="{{ user.pk }}" data-ref="{{ obj.pk }}" data-value="-1">-1</a>
 	{% endif %}
+	{% if not short %}
 	Décompte des voix : {{ obj.balance }}
+	{% endif %}
 </p>
