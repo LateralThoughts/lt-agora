@@ -19,6 +19,7 @@ class Decision(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
     closed_at = models.DateTimeField(null=True, blank=True, default=default_closed_date)
     document = models.FileField(upload_to="decision_docs", null=True, blank=True)
+    parent = models.ForeignKey('self', null=True, blank=True, related_name="offsprings")
 
     def is_closed(self):
         return self.closed_at <= datetime.utcnow().replace(tzinfo=utc)
@@ -26,9 +27,18 @@ class Decision(models.Model):
     def balance(self):
         return self.votes.aggregate(balance=Sum('value')).get('balance', 0)
 
+    def is_consensual(self):
+        for vote in self.votes.all():
+            if vote.value == -1:
+                return False
+        return True
+
     @models.permalink
     def get_absolute_url(self):
         return ('decision_detail', [str(self.pk)])
+
+    def __unicode__(self):
+        return "LT-%s : %s" % (self.pk, self.title)
 
     class Meta:
         ordering = ['-closed_at', 'created_at']

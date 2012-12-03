@@ -11,6 +11,17 @@
     {% else %}
     Pas de documents associés
     {% endif %}
-</div>
-
+  </div>
+  {% if obj.parent %}
+  <span>Cette proposition est une contre-proposition à <a href="{{ obj.parent.get_absolute_url}}">"{{obj.title}}"</a></span>
+  {% endif %}
+  {% if obj.offsprings.all %}
+  <div>
+    Cette proposition a engendré les propositions suivantes :
+    <ul>
+      {% for decision in obj.offsprings.all %}
+        <li><a href="{{ decision.get_absolute_url}}">"{{decision.title}}"</a></span></li>
+      {% endfor %}
+  </div>
+  {% endif %}
 </div>

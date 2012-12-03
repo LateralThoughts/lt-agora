@@ -212,4 +212,3 @@ if DEBUG:
     DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS' : False }
     #EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
     #EMAIL_FILE_PATH = '/tmp/app-messages' # change this to a proper location
-
