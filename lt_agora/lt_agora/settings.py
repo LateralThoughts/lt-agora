@@ -8,6 +8,9 @@ AGORA_CONTACT = u'contact@lateral-thoughts.com'
 
 AGORA_BOT_EMAIL = 'platon@agora.lateral-thoughts.com'
 
+AGORA_ORGANIZATION_NAME = 'Lateral-Thoughts'
+AGORA_ORGANIZATION_SHORTNAME = 'LT'
+
 ADMINS = (
     ('Olivier Girardot', 'o.girardot@lateral-thoughts.com'),
 )
@@ -144,6 +147,7 @@ SOCIAL_AUTH_PIPELINE = (
 LOGIN_REDIRECT_URL = "/"
 LOGIN_ERROR_URL    = '/'
 SOCIAL_AUTH_RAISE_EXCEPTIONS = True
+SOCIAL_AUTH_SESSION_EXPIRATION = False
 
 #-------------------------------------------------
 # Registered applications
