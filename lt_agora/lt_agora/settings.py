@@ -10,6 +10,7 @@ AGORA_BOT_EMAIL = 'platon@agora.lateral-thoughts.com'
 
 AGORA_ORGANIZATION_NAME = 'Lateral-Thoughts'
 AGORA_ORGANIZATION_SHORTNAME = 'LT'
+AGORA_ORGANIZATION_DOMAIN = "@lateral-thoughts.com"
 
 ADMINS = (
     ('Olivier Girardot', 'o.girardot@lateral-thoughts.com'),
