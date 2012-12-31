@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.conf import settings
 from agora.models import Decision
 from datetime import datetime
 
@@ -10,6 +11,7 @@ def index(request,
         {
             'in_progress' : in_progress,
             'closed' : closed,
+            'organization_name' : settings.AGORA_ORGANIZATION_SHORTNAME
         })
 
 def about(request,
