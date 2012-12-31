@@ -24,6 +24,7 @@ urlpatterns += patterns('agora.views',
     url(r'^$', login_required(index), name='home'),
     url(r'^about/?$', 'about', name='about'),
     url(r'^logout/?$', 'index', name='logout'),
+    url(r'^rdf/?$', 'rdf', name='rdf'),
 )
 
 # generic views
