@@ -65,7 +65,7 @@ def notify_contact(sender, instance, created, **kwargs):
     from django.conf import settings
     from django.core.mail import EmailMessage
     from django.template.loader import render_to_string
-    if not settings.DEBUG:
+    if not settings.DEBUG and settings.AGORA_SEND_MAIL:
         subject = 'A new proposal has been submitted, LT-%s' % instance.pk
         from_email = settings.AGORA_BOT_EMAIL
         to = settings.AGORA_CONTACT
@@ -92,15 +92,15 @@ def consensus_handler(sender, instance, created, **kwargs):
         decision = instance.decision
         decision.closed_at = datetime.now()
         decision.save()
-
-        subject = 'Proposal LT-%s has been accepted' % decision.pk
-        from_email = settings.AGORA_BOT_EMAIL
-        to = settings.AGORA_CONTACT
-        ctxt = {'obj': decision }
-        html_content = render_to_string('agora/email_decision_ok_body.html', ctxt)
-        msg = EmailMessage(subject, html_content, from_email, [to])
-        msg.content_subtype = "html" # Main content is now text/html
-        msg.send()
+        if settings.AGORA_SEND_MAIL:
+            subject = 'Proposal LT-%s has been accepted' % decision.pk
+            from_email = settings.AGORA_BOT_EMAIL
+            to = settings.AGORA_CONTACT
+            ctxt = {'obj': decision }
+            html_content = render_to_string('agora/email_decision_ok_body.html', ctxt)
+            msg = EmailMessage(subject, html_content, from_email, [to])
+            msg.content_subtype = "html" # Main content is now text/html
+            msg.send()
 
 post_save.connect(consensus_handler, sender=Vote)
 
@@ -111,7 +111,7 @@ def notify_comment(sender, instance, created, **kwargs):
     from django.core.mail import EmailMessage
     from django.template.loader import render_to_string
 
-    if isinstance(instance.content_object, Decision):
+    if isinstance(instance.content_object, Decision) and settings.AGORA_SEND_MAIL:
         decision = instance.content_object
         subject = 'New comment on LT-%s has been accepted' % decision.pk
         from_email = settings.AGORA_BOT_EMAIL
@@ -127,11 +127,12 @@ post_save.connect(notify_comment, sender=Comment)
 def notify_last_missing(sender, instance, created, **kwargs):
     """Notify last person who did not vote"""
     from django.contrib.auth.models import User
+    from django.conf import settings
     last_users = User.objects.exclude(pk__in=[vote["user"] for vote in instance.decision.votes.values("user")])
-    if last_users.count() == 1:
+    if last_users.count() == 1 and settings.AGORA_SEND_MAIL:
         retardataire = last_users[0]
         subject = "Votre avis est requis pour LT-%s" % (instance.decision.pk)
-        text = u"Tout le monde a voté sauf vous. Veuillez vous rendre à l'adresse http://agora.lateral-thoughts.com%s" % (instance.decision.get_absolute_url())
+        text = u"Tout le monde a voté sauf vous. Veuillez vous rendre à l'adresse http://%s%s" % (settings.AGORA_SITE_URL, instance.decision.get_absolute_url())
         retardataire.email_user(subject, text)
 
 post_save.connect(notify_last_missing, sender=Vote)

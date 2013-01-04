@@ -31,11 +31,17 @@ A few env variables are needed to configure the projet properly :
 
 * AGORA_GOOGLE_CLIENT_ID : google api console client id for app
 * AGORA_GOOGLE_CLIENT_SECRET : google secret api key for app
-* AGORA_EMAIL_HOST : for the server to use for smtp
-* AGORA_EMAIL_HOST_USER
-* AGORA_EMAIL_HOST_PASSWORD
-* AGORA_EMAIL_PORT
-* AGORA_EMAIL_USE_TLS ("True" or "False")
+
+A few env variables are optional but useful for more features :
+* AGORA_SEND_MAIL : If Agora should send emails, defaults to False
+* AGORA_SITE_URL : The Agora website (only the hostname and port), defaults to localhost:8000
+
+and all the variables that you may need to configure emails 
+* AGORA_EMAIL_HOST : for the server to use for smtp, defaults to localhost
+* AGORA_EMAIL_HOST_USER defaults to blank
+* AGORA_EMAIL_HOST_PASSWORD defaults to blank
+* AGORA_EMAIL_PORT defaults to 25
+* AGORA_EMAIL_USE_TLS ("True" or "False") defaults to False
 
 License
 -------

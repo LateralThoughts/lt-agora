@@ -4,6 +4,7 @@ import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+# --------------- APPLICATION Custom Settings ----------------
 AGORA_CONTACT = u'contact@lateral-thoughts.com'
 
 AGORA_BOT_EMAIL = 'platon@agora.lateral-thoughts.com'
@@ -11,6 +12,16 @@ AGORA_BOT_EMAIL = 'platon@agora.lateral-thoughts.com'
 AGORA_ORGANIZATION_NAME = 'Lateral-Thoughts'
 AGORA_ORGANIZATION_SHORTNAME = 'LT'
 AGORA_ORGANIZATION_DOMAIN = "@lateral-thoughts.com"
+
+# desactivate email services
+AGORA_SEND_MAIL = os.environ.get('AGORA_SEND_MAIL', False)
+AGORA_SITE_URL = os.environ.get('AGORA_SITE_URL', "localhost:8000")
+
+EMAIL_HOST = os.environ.get('AGORA_EMAIL_HOST', "localhost")
+EMAIL_HOST_USER = os.environ.get('AGORA_EMAIL_HOST_USER', "") 
+EMAIL_HOST_PASSWORD = os.environ.get('AGORA_EMAIL_HOST_PASSWORD', "")
+EMAIL_PORT = os.environ.get('AGORA_EMAIL_PORT', 25)
+EMAIL_USE_TLS = os.environ.get('AGORA_EMAIL_USE_TLS', False)
 
 ADMINS = (
     ('Olivier Girardot', 'o.girardot@lateral-thoughts.com'),
@@ -28,6 +39,9 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+# ------------------------------------------------------------
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -205,11 +219,6 @@ LOGGING = {
 # desactivate comment email notification
 FLUENT_COMMENTS_USE_EMAIL_NOTIFICATION = False
 
-EMAIL_HOST = os.environ['AGORA_EMAIL_HOST']
-EMAIL_HOST_USER = os.environ['AGORA_EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = os.environ['AGORA_EMAIL_HOST_PASSWORD']
-EMAIL_PORT = os.environ['AGORA_EMAIL_PORT']
-EMAIL_USE_TLS = os.environ['AGORA_EMAIL_USE_TLS']
 
 if DEBUG:
     MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
