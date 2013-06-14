@@ -13,7 +13,7 @@
     {% endif %}
   </div>
   {% if obj.parent %}
-  <span>Cette proposition est une contre-proposition à <a href="{{ obj.parent.get_absolute_url}}">"{{obj.title}}"</a></span>
+  <span>Cette proposition est un complément à <a href="{{ obj.parent.get_absolute_url}}">"{{obj.title}}"</a></span>
   {% endif %}
   {% if obj.offsprings.all %}
   <div>

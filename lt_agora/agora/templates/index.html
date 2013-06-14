@@ -3,7 +3,7 @@
 {% block content %}
   <div class="hero-unit">
     <h1>Bienvenue sur l'Agora</h1>
-    <p>Cette plateforme vous permet d'avoir accès aux décisions collègialement prises au sein de {{ organization_name }}.
+    <p>Cette plateforme vous permet d'avoir accès aux décisions collégialement prises au sein de {{ organization_name }}.
       <ul>
         <li>Voir les décisions prises et archivées;</li>
         <li>Voter pour les décisions en cours d'arbitrage;</li>
@@ -14,7 +14,7 @@
 
     <div class="row">
       <div class="span6">
-        <h2>A voter</h2>
+        <h2>À voter</h2>
         <p>{% for decision in in_progress %}
           {% include 'agora/inc_decision_detail.html' with obj=decision only %}
           {% endfor %}</p>

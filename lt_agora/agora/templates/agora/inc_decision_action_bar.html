@@ -11,7 +11,7 @@
 	{% if not short %}
 	Décompte des voix : {{ obj.balance }}
 	{% if not obj.is_consensual %}
-	  <a class="btn" href="{% url decision_create %}">Créer une contre-proposition</a>
+	  <a class="btn" href="{% url decision_create %}">Compléter la proposition</a>
 	{% endif %}
 	{% endif %}
 </p>
