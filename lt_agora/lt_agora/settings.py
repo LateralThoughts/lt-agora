@@ -23,6 +23,9 @@ EMAIL_HOST_PASSWORD = os.environ.get('AGORA_EMAIL_HOST_PASSWORD', "")
 EMAIL_PORT = os.environ.get('AGORA_EMAIL_PORT', 25)
 EMAIL_USE_TLS = os.environ.get('AGORA_EMAIL_USE_TLS', False)
 
+AGORA_DB_ENGINE = os.environ.get('AGORA_DB_ENGINE', 'django.db.backends.sqlite3')
+AGORA_DB_NAME = os.environ.get('AGORA_DB_NAME', "agora.db")
+
 ADMINS = (
     ('Olivier Girardot', 'o.girardot@lateral-thoughts.com'),
 )
@@ -31,9 +34,9 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'agora.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
+        'ENGINE': AGORA_DB_ENGINE, # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': AGORA_DB_NAME,                      # Or path to database file if using sqlite3.
+        'USER': 'agora',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
