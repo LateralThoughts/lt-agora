@@ -23,6 +23,7 @@ class DecisionDetailView(DetailView):
 class DecisionCreateView(CreateView):
     form_class = DecisionForm
     login_required = True
+    template_name = 'agora/decision_form.html'
 
 
 class AuthorDetailView(DetailView):
