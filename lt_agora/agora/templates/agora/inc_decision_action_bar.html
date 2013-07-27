@@ -1,3 +1,4 @@
+{% load url from future %}
 <p>{% if not short %}Status : {% endif %}
 	{% if obj.is_closed %}
 	  <span class="label label-success">Terminé</span>
