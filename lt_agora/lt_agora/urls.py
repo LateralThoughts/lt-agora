@@ -6,8 +6,7 @@ from django.conf import settings
 
 from tastypie.api import Api
 from agora.api import DecisionResource, VoteResource, UserResource
-from agora.models import Decision
-from agora.forms import DecisionForm
+from agora.views import *
 
 admin.autodiscover()
 
@@ -26,37 +25,19 @@ urlpatterns += patterns('agora.views',
     url(r'^logout/?$', 'index', name='logout'),
 )
 
-# generic views
-decision_info_dict = {
-    'queryset': Decision.objects.all(),
-}
-author_info_dict = {
-    'queryset': User.objects.all(),
-}
-decision_cinfo_dict = {
-  'form_class': DecisionForm,
-  'login_required': True,
-}
-
-from django.views.generic.list_detail import object_list, object_detail
-from django.views.generic.create_update import create_object
 urlpatterns += patterns('',
     url(r'^decision/all/?$',
-        login_required(object_list),
-        decision_info_dict,
+        login_required(DecisionListView.as_view()),
         name="decision_list"),
     url(r'^decision/create/?$',
-        login_required(create_object),
-        decision_cinfo_dict,
+        login_required(DecisionCreateView.as_view()),
         name="decision_create"),
-    url(r'^decision/(?P<object_id>\d+)/$',
-        login_required(object_detail),
-        decision_info_dict,
+    url(r'^decision/(?P<pk>\d+)/$',
+        login_required(DecisionDetailView.as_view()),
         name="decision_detail"),
     # author part :
-    url(r'^author/(?P<object_id>\d+)/$',
-        login_required(object_detail),
-        author_info_dict,
+    url(r'^author/(?P<pk>\d+)/$',
+        login_required(AuthorDetailView.as_view()),
         name="author_detail"),
 )
 
