@@ -39,7 +39,7 @@
       <form class="form-signin">
         <h2 class="form-signin-heading">Connexion requise</h2>
         <div class="center">
-        <a class="btn btn-large btn-primary" href="{% url socialauth_begin 'google-oauth2' %}?next={{ next }}">Se connecter avec Google</a>
+        <a class="btn btn-large btn-primary" href="{% url 'socialauth_begin' 'google-oauth2' %}?next={{ next }}">Se connecter avec Google</a>
       </div>
       </form>
 {% endblock %}

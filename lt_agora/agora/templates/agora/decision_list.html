@@ -17,7 +17,7 @@
             <td><a href="{{ decision.get_absolute_url }}">LT-{{ decision.pk }}</a></td>
             <td><a href="{{ decision.get_absolute_url }}">{{ decision.title }}</a></td>
             <td>{{ decision.created_at }}</td>
-            <td><a href="{% url author_detail user.pk %}">{{ decision.user }}</a></td>
+            <td><a href="{% url 'author_detail' user.pk %}">{{ decision.user }}</a></td>
             <td>{% include "agora/inc_decision_action_bar.html" with obj=decision user=user short=1 only %}</td>
         </tr>
         {% endfor %}

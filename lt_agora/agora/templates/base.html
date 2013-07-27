@@ -23,23 +23,23 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="{% url home %}">LT-Agora</a>
+          <a class="brand" href="{% url 'home' %}">LT-Agora</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li {% block nav_home %}{% endblock %}><a href="{% url home %}">Page d'accueil</a></li>
-              <li {% block nav_prop %}{% endblock %}><a href="{% url decision_list %}">Propositions</a></li>
-              <li {% block nav_propc %}{% endblock %}><a href="{% url decision_create %}">Soumettre une proposition</a></li>
-              <li {% block nav_about %}{% endblock %}><a href="{% url about %}">A propos</a></li>
+              <li {% block nav_home %}{% endblock %}><a href="{% url 'home' %}">Page d'accueil</a></li>
+              <li {% block nav_prop %}{% endblock %}><a href="{% url 'decision_list' %}">Propositions</a></li>
+              <li {% block nav_propc %}{% endblock %}><a href="{% url 'decision_create' %}">Soumettre une proposition</a></li>
+              <li {% block nav_about %}{% endblock %}><a href="{% url 'about' %}">A propos</a></li>
             </ul>
 
             <ul class="nav pull-right">
               {% if user.is_authenticated %}
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ user.email }}<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <a href="{% url auth_logout %}">Déconnexion</a>
+                <a href="{% url 'auth_logout' %}">Déconnexion</a>
               </ul>
               {% else %}
-              <a href="{% url socialauth_begin 'google-oauth2' %}" class="btn">Connectez-vous</a>
+              <a href="{% url 'socialauth_begin' 'google-oauth2' %}" class="btn">Connectez-vous</a>
               {% endif %}
             </ul>
           </div><!--/.nav-collapse -->
