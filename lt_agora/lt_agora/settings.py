@@ -188,6 +188,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'agora',
     'accounts',
+    'gunicorn',
 )
 
 # A sample logging configuration. The only tangible logging
