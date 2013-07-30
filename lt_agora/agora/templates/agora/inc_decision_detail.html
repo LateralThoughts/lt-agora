@@ -1,3 +1,4 @@
+{% load url from future %}
 <div>
   <span><a href="{{ obj.get_absolute_url }}"><strong>{{ obj.title }}</strong></a> terminé le {{ obj.closed_at }}</span>
   <blockquote>
