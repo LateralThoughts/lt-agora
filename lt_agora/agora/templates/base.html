@@ -35,10 +35,18 @@
 
             <ul class="nav pull-right">
               {% if user.is_authenticated %}
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ user.email }}<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <a href="{% url 'auth_logout' %}">Déconnexion</a>
-              </ul>
+
+	      <div class="btn-group">
+		  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+		    {{ user.email }}
+		    <span class="caret"></span>
+		  </a>
+		  <ul class="dropdown-menu">
+		    <!-- dropdown menu links -->
+		    <li><a href="{% url 'auth_logout' %}">Déconnexion</a></li>
+		  </ul>
+	      </div>
+
               {% else %}
               <a href="{% url 'socialauth_begin' 'google-oauth2' %}" class="btn">Connectez-vous</a>
               {% endif %}
